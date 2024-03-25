@@ -1,8 +1,10 @@
-package pl.ilvendev.ecommerce;
+package pl.ilvendev.ecommerce.catalog;
 
 import org.junit.jupiter.api.Test;
+import pl.ilvendev.ecommerce.catalog.Product;
+import pl.ilvendev.ecommerce.catalog.ProductCatalog;
+
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.util.List;

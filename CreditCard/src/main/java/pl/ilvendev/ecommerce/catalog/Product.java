@@ -1,4 +1,4 @@
-package pl.ilvendev.ecommerce;
+package pl.ilvendev.ecommerce.catalog;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -10,6 +10,14 @@ public class Product {
     private final String description;
 
     private BigDecimal price;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 
     public Product(UUID id, String name, String description) {
         this.id = id;

@@ -1,4 +1,4 @@
-package org.fic.creditcard;
+package pl.ilvendev.creditcard;
 
 import org.junit.jupiter.api.Test;
 
