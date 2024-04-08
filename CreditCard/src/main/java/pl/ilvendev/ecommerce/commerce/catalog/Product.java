@@ -1,4 +1,4 @@
-package pl.ilvendev.ecommerce.catalog;
+package pl.ilvendev.ecommerce.commerce.catalog;
 
 import java.math.BigDecimal;
 import java.util.UUID;

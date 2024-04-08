@@ -3,7 +3,7 @@ package pl.ilvendev.ecommerce;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import pl.ilvendev.ecommerce.catalog.ProductCatalog;
+import pl.ilvendev.ecommerce.commerce.catalog.ProductCatalog;
 
 @SpringBootApplication
 public class App {
@@ -15,8 +15,10 @@ public class App {
     @Bean
     ProductCatalog createMyProductCatalog(){
         var catalog = new ProductCatalog();
-        catalog.addProduct("Gamer supps", "Sigma taste");
+        catalog.addProduct("Gamer sups", "Sigma taste");
         catalog.addProduct("Glass jar", "For figurines");
+
+
         return catalog;
     }
 }

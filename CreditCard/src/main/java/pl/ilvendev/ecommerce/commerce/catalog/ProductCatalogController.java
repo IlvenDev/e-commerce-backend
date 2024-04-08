@@ -1,4 +1,4 @@
-package pl.ilvendev.ecommerce.catalog;
+package pl.ilvendev.ecommerce.commerce.catalog;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

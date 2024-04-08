@@ -1,8 +1,8 @@
 package pl.ilvendev.ecommerce.catalog;
 
 import org.junit.jupiter.api.Test;
-import pl.ilvendev.ecommerce.catalog.Product;
-import pl.ilvendev.ecommerce.catalog.ProductCatalog;
+import pl.ilvendev.ecommerce.commerce.catalog.Product;
+import pl.ilvendev.ecommerce.commerce.catalog.ProductCatalog;
 
 import static org.assertj.core.api.Assertions.*;
 
