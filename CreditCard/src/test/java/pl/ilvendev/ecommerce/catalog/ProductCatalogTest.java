@@ -11,43 +11,41 @@ import java.util.List;
 
 
 public class ProductCatalogTest {
-
     @Test
-    void itListAvailableProducts(){
+    void itListsAvailableProducts() {
         ProductCatalog catalog = new ProductCatalog();
+
         List<Product> products = catalog.allProducts();
 
         assert products.isEmpty();
     }
 
     @Test
-    void itAllowsToAddProduct(){
+    void itAllowsToAddProduct() {
         ProductCatalog catalog = new ProductCatalog();
-        catalog.addProduct("LegoSet 8083", "Nice one");
 
+        catalog.addProduct("Lego set 8083", "Nice on!");
         List<Product> products = catalog.allProducts();
 
-        assertThat(products)
-                .hasSize(1);
+        assertThat(products).hasSize(1);
     }
 
     @Test
-    void itLoadsSingleProductById(){
+    void itLoadSingleProductById() {
         ProductCatalog catalog = new ProductCatalog();
-        String id = catalog.addProduct("LegoSet 8083", "Nice one");
-
-        Product loaded = catalog.getProductBy(id);
+        String id = catalog.addProduct("Lego set 8083", "Nice one!");
+        Product loaded = catalog.getProductById(id);
 
         assertThat(id).isEqualTo(loaded.getId());
     }
 
     @Test
-    void itAllowsToChangePrice(){
+    void itAllowsPriceChange() {
         ProductCatalog catalog = new ProductCatalog();
-        String id = catalog.addProduct("LegoSet 8083", "Nice one");
+        String id = catalog.addProduct("Lego set 8083", "Nice one!");
 
         catalog.changePrice(id, BigDecimal.valueOf(10.10));
-        Product loaded = catalog.getProductBy(id);
+        Product loaded = catalog.getProductById(id);
 
         assertThat(BigDecimal.valueOf(10.10)).isEqualTo(loaded.getPrice());
     }
