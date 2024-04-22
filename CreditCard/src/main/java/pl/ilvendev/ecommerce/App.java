@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import pl.ilvendev.ecommerce.commerce.catalog.ProductCatalog;
+import pl.jkanclerz.productcatalog.HashMapProductStorage;
 
 @SpringBootApplication
 public class App {
@@ -14,7 +15,7 @@ public class App {
 
     @Bean
     ProductCatalog createMyProductCatalog(){
-        var catalog = new ProductCatalog();
+        var catalog = new ProductCatalog(new HashMapProductStorage());
         catalog.addProduct("Gamer sups", "Sigma taste");
         catalog.addProduct("Glass jar", "For figurines");
 
