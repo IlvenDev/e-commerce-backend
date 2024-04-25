@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import pl.ilvendev.ecommerce.commerce.catalog.ProductCatalog;
-import pl.jkanclerz.productcatalog.HashMapProductStorage;
+import pl.ilvendev.ecommerce.commerce.catalog.HashMapProductStorage;
 
 @SpringBootApplication
 public class App {

@@ -8,16 +8,7 @@ public class Product {
     private final UUID id;
     private final String name;
     private final String description;
-
     private BigDecimal price;
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
 
     public Product(UUID id, String name, String description) {
         this.id = id;
@@ -33,7 +24,15 @@ public class Product {
         return price;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public void setPrice(BigDecimal newPrice){
-        this.price = newPrice;
+        price = newPrice;
     }
 }

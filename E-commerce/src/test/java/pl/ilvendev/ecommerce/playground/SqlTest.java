@@ -30,6 +30,7 @@ public class SqlTest {
                 `id` varchar(255) NOT NULL,
                 `name` VARCHAR(100) NOT NULL,
                 `price` DECIMAL(12,2),
+                `description` VARCHAR(255) NOT NULL,
                 PRIMARY KEY(id)
             );
         """;
@@ -37,7 +38,7 @@ public class SqlTest {
     }
 
     @Test
-    void itSelectForCurrentDate() {
+    void canSelectCurrentDate() {
         var myDate = jdbcTemplate.queryForObject(
                 "Select now() myCurrentDate",
                 String.class
@@ -47,7 +48,7 @@ public class SqlTest {
     }
 
     @Test
-    void itCreatesTable(){
+    void canCreateTable(){
 
         var countSql = "SELECT COUNT(*) FROM `productCatalog__products`;";
         var results = jdbcTemplate.queryForObject(countSql, Integer.class);
@@ -56,12 +57,12 @@ public class SqlTest {
     }
 
     @Test
-    void itStoreProducts(){
+    void canStoreProducts(){
         var myInsertSql = """
-            INSERT INTO `productCatalog__products` (id,name,price)
+            INSERT INTO `productCatalog__products` (id,name,description,price)
             VALUES
-                ('productId1', 'gamer supps', 12.12),
-                ('productId2', 'glass jar', 13.13);
+                ('productId1', 'gamer supps', 'bathwater flavor', 12.12),
+                ('productId2', 'glass jar', 'for figurines', 13.13);
         """;
 
         jdbcTemplate.execute(myInsertSql);
@@ -73,16 +74,16 @@ public class SqlTest {
     }
 
     @Test
-    void itStoreDynamicProducts(){
+    void canStoreDynamicProducts(){
         var product = new Product(UUID.randomUUID(), "gamer supps", "Gamer");
         product.setPrice(BigDecimal.valueOf(10.10));
         var myInsertSql = """
-            INSERT INTO `productCatalog__products` (id,name,price)
+            INSERT INTO `productCatalog__products` (id,name, description,price)
             VALUES
-                (?,?,?)
+                (?,?,?,?)
                 ;
         """;
-        jdbcTemplate.update(myInsertSql, product.getId(), product.getName(), product.getPrice());
+        jdbcTemplate.update(myInsertSql, product.getId(), product.getName(), product.getDescription(),product.getPrice());
 
         var countSql = "SELECT COUNT(*) FROM `productCatalog__products`;";
         var results = jdbcTemplate.queryForObject(countSql, Integer.class);
@@ -91,44 +92,51 @@ public class SqlTest {
     }
 
     @Test
-    void loadProductsById(){
+    void canLoadProductsById(){
         var product = new Product(UUID.randomUUID(), "gamer supps", "Gamer");
         product.setPrice(BigDecimal.valueOf(10.10));
 
         var myInsertSql = """
-            INSERT INTO `productCatalog__products` (id,name,price)
+            INSERT INTO `productCatalog__products` (id,name,description,price)
             VALUES
-                (?,?,?)
+                (?,?,?,?)
                 ;
         """;
-        jdbcTemplate.update(myInsertSql, product.getId(), product.getName(), product.getPrice());
+        jdbcTemplate.update(myInsertSql, product.getId(), product.getName(), product.getDescription(), product.getPrice());
 
         var productId = product.getId();
         var selectProductSql = "SELECT * FROM `productCatalog__products` where id = ?";
         Product loadedProduct = jdbcTemplate.queryForObject(
                 selectProductSql,
-                new Object[]{productId},
-                (rs,i) -> {
-                    var myProduct = new Product(
-                            UUID.fromString(rs.getString("id")),
-                            rs.getString("name"),
-                            rs.getString("name")
-                    );
-
-                    myProduct.setPrice(BigDecimal.valueOf(rs.getDouble("price")));
-                    return myProduct;
-                }
+                new ProductRowMapper(),
+                productId
         );
+
+        assertThat(loadedProduct).usingRecursiveComparison().isEqualTo(product);
 
     }
 
+    class ProductRowMapper implements RowMapper<Product> {
+        @Override
+        public Product mapRow(ResultSet rs, int rowNum) throws SQLException{
+            var myProduct = new Product(
+                    UUID.fromString(rs.getString("id")),
+                    rs.getString("name"),
+                    rs.getString("description")
+            );
+
+            myProduct.setPrice(BigDecimal.valueOf(rs.getDouble("price")));
+            return myProduct;
+        };
+    };
+
     @Test
-    void itLoadsAllProductsAtOnce(){
+    void canLoadAllProductsAtOnce(){
         var myInsertSql = """
-            INSERT INTO `productCatalog__products` (id,name,price)
+            INSERT INTO `productCatalog__products` (id,name,description,price)
             VALUES
-                ('productId1', 'gamer supps', 12.12),
-                ('productId2', 'glass jar', 13.13);
+                ('productId1', 'gamer supps', 'bathwater flavor', 12.12),
+                ('productId2', 'glass jar', 'for figurines', 13.13);
         """;
         var selectProductSql = "SELECT * FROM `productCatalog__products`";
 
@@ -137,19 +145,11 @@ public class SqlTest {
         List<Map<String, Object>> productList = jdbcTemplate.queryForList(
                 selectProductSql
         );
+
+        assertThat(productList).hasSize(2);
+
+
     };
 
-    /*class ProductRowMapper implements RowMapper<Product>{
-        @Override
-        public Product mapRow(ResultSet rs, int rowNum) throws SQLException{
-            var myProduct = new Product(
-                    UUID.fromString(rs.getString("id")),
-                    rs.getString("name"),
-                    rs.getString("name")
-            );
 
-            myProduct.setPrice(BigDecimal.valueOf(rs.getDouble("price")));
-            return myProduct;
-        };
-    };*/
 }

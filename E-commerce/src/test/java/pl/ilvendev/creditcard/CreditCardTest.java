@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class CreditCardTest {
     @Test
-    void itAssignCredit(){
+    void canAssignCredit(){
         CreditCard card = new CreditCard();
 
         card.assignCredit(BigDecimal.valueOf(1000));
@@ -15,7 +15,7 @@ public class CreditCardTest {
     }
 
     @Test
-    void itDenyCreditBelowThreshold(){
+    void cannotAssignCreditBelowThreshold(){
         CreditCard card = new CreditCard();
 
         try{

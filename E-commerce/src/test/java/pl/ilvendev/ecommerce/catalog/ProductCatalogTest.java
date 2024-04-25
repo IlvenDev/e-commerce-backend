@@ -1,19 +1,19 @@
 package pl.ilvendev.ecommerce.catalog;
 
 import org.junit.jupiter.api.Test;
+import pl.ilvendev.ecommerce.commerce.catalog.HashMapProductStorage;
 import pl.ilvendev.ecommerce.commerce.catalog.Product;
 import pl.ilvendev.ecommerce.commerce.catalog.ProductCatalog;
-import pl.jkanclerz.productcatalog.HashMapProductStorage;
-
-import static org.assertj.core.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
+
 
 public class ProductCatalogTest {
     @Test
-    void itListsAvailableProducts() {
+    void canListAvailableProducts() {
         ProductCatalog catalog = new ProductCatalog(new HashMapProductStorage());
 
         List<Product> products = catalog.allProducts();
@@ -22,7 +22,7 @@ public class ProductCatalogTest {
     }
 
     @Test
-    void itAllowsToAddProduct() {
+    void canAddProduct() {
         ProductCatalog catalog = new ProductCatalog(new HashMapProductStorage());
 
         catalog.addProduct("Lego set 8083", "Nice on!");
@@ -32,7 +32,7 @@ public class ProductCatalogTest {
     }
 
     @Test
-    void itLoadSingleProductById() {
+    void canLoadSingleProductById() {
         ProductCatalog catalog = new ProductCatalog(new HashMapProductStorage());
         String id = catalog.addProduct("Lego set 8083", "Nice one!");
         Product loaded = catalog.getProductById(id);
@@ -41,7 +41,7 @@ public class ProductCatalogTest {
     }
 
     @Test
-    void itAllowsPriceChange() {
+    void canChangePrice() {
         ProductCatalog catalog = new ProductCatalog(new HashMapProductStorage());
         String id = catalog.addProduct("Lego set 8083", "Nice one!");
 

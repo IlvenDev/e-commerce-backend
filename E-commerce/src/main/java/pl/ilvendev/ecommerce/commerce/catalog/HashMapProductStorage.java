@@ -1,4 +1,4 @@
-package pl.jkanclerz.productcatalog;
+package pl.ilvendev.ecommerce.commerce.catalog;
 
 import pl.ilvendev.ecommerce.commerce.catalog.Product;
 import pl.ilvendev.ecommerce.commerce.catalog.ProductStorage;
