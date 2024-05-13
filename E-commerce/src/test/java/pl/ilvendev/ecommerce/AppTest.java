@@ -1,4 +1,4 @@
-package pl.ilvendev.ecommerce.catalog;
+package pl.ilvendev.ecommerce;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
