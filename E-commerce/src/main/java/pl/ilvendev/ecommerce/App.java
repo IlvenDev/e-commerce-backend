@@ -3,8 +3,9 @@ package pl.ilvendev.ecommerce;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import pl.ilvendev.ecommerce.commerce.catalog.ProductCatalog;
-import pl.ilvendev.ecommerce.commerce.catalog.HashMapProductStorage;
+import pl.ilvendev.ecommerce.catalog.ProductCatalog;
+import pl.ilvendev.ecommerce.catalog.HashMapProductStorage;
+import pl.ilvendev.ecommerce.sales.SalesFacade;
 
 @SpringBootApplication
 public class App {
@@ -21,5 +22,10 @@ public class App {
 
 
         return catalog;
+    }
+
+    @Bean
+    SalesFacade createSales(){
+        return new SalesFacade();
     }
 }

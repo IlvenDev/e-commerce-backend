@@ -7,25 +7,34 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SalesController {
+    SalesFacade sales;
 
-    SalesFacade sales = new SalesFacade();
+    public SalesController(SalesFacade sales) {
+        this.sales = sales;
+    }
 
     @GetMapping("/api/current-offer")
-    Offer getCurrentOffer(){
-        String customerId = getCustomerId();
-        return sales.getCurrectOffer();
+    Offer getCurrentOffer() {
+        String customerId = getCurrentCustomerId();
+        return sales.getCurrentOffer(customerId);
     }
 
     @PostMapping("/api/accept-offer")
-    ReservationDetails acceptOffer(){
+    ReservationDetails acceptOffer() {
         String customerId = getCurrentCustomerId();
         ReservationDetails details = sales.acceptOffer(customerId);
         return details;
     }
 
     @PostMapping("/api/add-to-cart/{productId}")
-    void addToCart(@PathVariable String productId){
+    void addToCart(@PathVariable String productId) {
         String customerId = getCurrentCustomerId();
         sales.addToCart(customerId, productId);
+
+    }
+
+
+    private String getCurrentCustomerId() {
+        return "Darya";
     }
 }

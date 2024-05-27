@@ -1,9 +1,6 @@
 package pl.ilvendev.ecommerce.catalog;
 
 import org.junit.jupiter.api.Test;
-import pl.ilvendev.ecommerce.commerce.catalog.HashMapProductStorage;
-import pl.ilvendev.ecommerce.commerce.catalog.Product;
-import pl.ilvendev.ecommerce.commerce.catalog.ProductCatalog;
 
 import java.math.BigDecimal;
 import java.util.List;

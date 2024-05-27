@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 
 public class ReservationDetails {
     public BigDecimal getTotal() {
-        return BigDecimal.ZERO;
+        return BigDecimal.valueOf(0);
     }
 
-    public String getReservationId() {
-        return "123abc";
+    public Object getReservationId() {
+        return 0;
     }
 
-    public String getPaymentURL() {
-        return "http://example-payment-gateway.com/123abc";
+    public Object getPaymentURL() {
+        return 0;
     }
 }

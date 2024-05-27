@@ -7,8 +7,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import pl.ilvendev.ecommerce.commerce.catalog.Product;
-import pl.ilvendev.ecommerce.commerce.catalog.ProductCatalog;
 
 import static org.assertj.core.api.Assertions.*;
 
