@@ -1,48 +1,52 @@
 package pl.ilvendev.ecommerce.sales.cart;
 
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Cart {
-
-    Map<String, Integer> productsQty;
-    public Cart() {
-        this.productsQty = new HashMap<>();
-    }
-
-
     public static Cart empty() {
         return new Cart();
     }
+    private final HashMap<String, Integer> productsQuantities;
 
+    public Cart() {
+        productsQuantities = new HashMap<>();
+    }
 
-    public void addProduct(String productId) {
-        if (!isInCart(productId)) {
-            addToCart(productId);
+    public void add(String product) {
+        if (!isInCart(product)) {
+            putIntoCart(product);
         } else {
-            increaseQuantity(productId);
+            increaseProductQuantity(product);
         }
     }
 
-    private void increaseQuantity(String productId) {
-        productsQty.put(
-                productId,
-                productsQty.get(productId) +1);
-
-    }
-
-    private void addToCart(String productId) {
-        productsQty.put(productId,1);
-    }
-
-    private boolean isInCart(String productId){
-        return productsQty.containsKey(productId);
-
-    }
-
     public boolean isEmpty() {
-        return productsQty.isEmpty();
+        return productsQuantities.values().isEmpty();
     }
 
+    public int getItemsCount() {
+        return productsQuantities.values().size();
+    }
 
+    public List<CartItem> getCartItems() {
+        return productsQuantities
+                .entrySet()
+                .stream()
+                .map(es -> new CartItem(es.getKey(), es.getValue()))
+                .collect(Collectors.toList());
+    }
+
+    private void putIntoCart(String product) {
+        productsQuantities.put(product, 1);
+    }
+
+    private void increaseProductQuantity(String product) {
+        productsQuantities.put(product, productsQuantities.get(product) + 1);
+    }
+
+    private boolean isInCart(String product) {
+        return productsQuantities.containsKey(product);
+    }
 }

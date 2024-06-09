@@ -1,32 +1,32 @@
 package pl.ilvendev.ecommerce.sales;
 
-import pl.ilvendev.ecommerce.sales.cart.Cart;
-import pl.ilvendev.ecommerce.sales.cart.InMemoryCartStorage;
+import pl.jkanclerz.ecommerce.sales.cart.Cart;
+import pl.jkanclerz.ecommerce.sales.cart.HashMapCartStorage;
 
 public class SalesFacade {
+    private HashMapCartStorage cartStorage;
 
-    private InMemoryCartStorage cartStorage;
+    public SalesFacade(HashMapCartStorage cartStorage) {
+        this.cartStorage = cartStorage;
+    }
 
     public Offer getCurrentOffer(String customerId) {
         return new Offer();
     }
 
-    public ReservationDetails acceptOffer(String customerId) {
+    public void addProduct(String customerId, String productId) {
+        Cart cart = getCartForCustomer(customerId);
+
+        cart.add(productId);
+
+    }
+
+    private Cart getCartForCustomer(String customerId) {
+        return cartStorage.getForCustomer(customerId)
+                .orElse(Cart.empty());
+    }
+
+    public ReservationDetails acceptOffer(String customerId, AcceptOfferRequest acceptOfferRequest) {
         return new ReservationDetails();
     }
-
-    public void addToCart(String customerId, String productId) {
-        Cart cart = loadCartForCustomer(customerId);
-
-        cart.addProduct(productId);
-    }
-
-    private Cart loadCartForCustomer(String customerId) {
-        return (Cart) cartStorage.findByCustomerId(customerId).orElse(Cart.empty());
-    }
-
-
-
-
 }
-

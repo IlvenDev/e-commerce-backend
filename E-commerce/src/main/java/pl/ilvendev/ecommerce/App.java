@@ -3,29 +3,34 @@ package pl.ilvendev.ecommerce;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import pl.ilvendev.ecommerce.catalog.ProductCatalog;
-import pl.ilvendev.ecommerce.catalog.HashMapProductStorage;
-import pl.ilvendev.ecommerce.sales.SalesFacade;
+import pl.jkanclerz.ecommerce.catalog.ArrayListProductStorage;
+import pl.jkanclerz.ecommerce.catalog.ProductCatalog;
+import pl.jkanclerz.ecommerce.sales.SalesFacade;
+import pl.jkanclerz.ecommerce.sales.cart.HashMapCartStorage;
+
+import java.math.BigDecimal;
 
 @SpringBootApplication
 public class App {
-    public static void main(String[] args){
-        System.out.println("Here");
+    public static void main(String[] args) {
+        System.out.println("Here we go!!");
         SpringApplication.run(App.class, args);
     }
 
     @Bean
-    ProductCatalog createMyProductCatalog(){
-        var catalog = new ProductCatalog(new HashMapProductStorage());
-        catalog.addProduct("Gamer sups", "Sigma taste");
-        catalog.addProduct("Glass jar", "For figurines");
+    ProductCatalog createCatalog() {
+        var catalog = new ProductCatalog(new ArrayListProductStorage());
+        var pid1 = catalog.addProduct("Lego set 8083", "nice one");
+        catalog.changePrice(pid1, BigDecimal.valueOf(100.10));
 
+        var pid2 = catalog.addProduct("Cobi set 8083", "nice one");
+        catalog.changePrice(pid2, BigDecimal.valueOf(50.10));
 
         return catalog;
     }
 
     @Bean
-    SalesFacade createSales(){
-        return new SalesFacade();
+    SalesFacade createSales() {
+        return new SalesFacade(new HashMapCartStorage());
     }
 }

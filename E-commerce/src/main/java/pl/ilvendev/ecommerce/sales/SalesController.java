@@ -1,12 +1,10 @@
 package pl.ilvendev.ecommerce.sales;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class SalesController {
+
     SalesFacade sales;
 
     public SalesController(SalesFacade sales) {
@@ -15,26 +13,23 @@ public class SalesController {
 
     @GetMapping("/api/current-offer")
     Offer getCurrentOffer() {
-        String customerId = getCurrentCustomerId();
+        var customerId = getCurrentCustomerId();
         return sales.getCurrentOffer(customerId);
     }
 
+    @PostMapping("/api/add-product/{productId}")
+    void addProduct(@PathVariable(name = "productId") String productId) {
+        var customerId = getCurrentCustomerId();
+        sales.addProduct(customerId, productId);
+    }
+
     @PostMapping("/api/accept-offer")
-    ReservationDetails acceptOffer() {
-        String customerId = getCurrentCustomerId();
-        ReservationDetails details = sales.acceptOffer(customerId);
-        return details;
+    ReservationDetails acceptOffer(@RequestBody AcceptOfferRequest acceptOfferRequest) {
+        var customerId = getCurrentCustomerId();
+        return sales.acceptOffer(customerId, acceptOfferRequest);
     }
-
-    @PostMapping("/api/add-to-cart/{productId}")
-    void addToCart(@PathVariable String productId) {
-        String customerId = getCurrentCustomerId();
-        sales.addToCart(customerId, productId);
-
-    }
-
 
     private String getCurrentCustomerId() {
-        return "Darya";
+        return "kuba";
     }
 }
