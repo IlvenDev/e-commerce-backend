@@ -1,7 +1,7 @@
 package pl.ilvendev.ecommerce.sales;
 
 import org.junit.jupiter.api.Test;
-import pl.jkanclerz.ecommerce.sales.cart.HashMapCartStorage;
+import pl.ilvendev.ecommerce.sales.cart.HashMapCartStorage;
 
 import java.math.BigDecimal;
 

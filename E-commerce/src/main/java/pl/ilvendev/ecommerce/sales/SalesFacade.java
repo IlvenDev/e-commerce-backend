@@ -1,7 +1,7 @@
 package pl.ilvendev.ecommerce.sales;
 
-import pl.jkanclerz.ecommerce.sales.cart.Cart;
-import pl.jkanclerz.ecommerce.sales.cart.HashMapCartStorage;
+import pl.ilvendev.ecommerce.sales.cart.Cart;
+import pl.ilvendev.ecommerce.sales.cart.HashMapCartStorage;
 
 public class SalesFacade {
     private HashMapCartStorage cartStorage;

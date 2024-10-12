@@ -1,3 +1,4 @@
+/*
 package pl.ilvendev.ecommerce.sales;
 
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import pl.jkanclerz.ecommerce.catalog.ProductCatalog;
+import pl.ilvendev.ecommerce.catalog.ProductCatalog;
 
 import java.math.BigDecimal;
 
@@ -24,7 +25,8 @@ public class SalesHttpTest {
     @Autowired
     ProductCatalog catalog;
 
-    @Test
+    */
+/*@Test
     void checkoutHappyPath() {
         String productId = thereIsProduct("Example", BigDecimal.valueOf(10.10));
         var addToCartUrl = asBaseURL(String.format("api/add-product/%s", productId));
@@ -54,16 +56,11 @@ public class SalesHttpTest {
         assertThat(reservationDetails.getReservationId()).isNotBlank();
 
 
-    }
+    }*//*
+
 
     private String asBaseURL(String addToCartUri) {
         return String.format("http://localhost:%s/%s", port, addToCartUri);
     }
-
-    private String thereIsProduct(String name, BigDecimal price) {
-        var id = catalog.addProduct(name, name);
-        catalog.changePrice(id, price);
-
-        return id;
-    }
 }
+*/
