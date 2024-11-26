@@ -11,7 +11,7 @@ jobs:
         with:
           java-version: '21'
           distribution: 'corretto'
-      - name: "Run maven test"
+      - name: "Run maven package"
         run: mvn -DskipTests package
       - run: ls -la target/
       - run: mv target/*.jar target/app.jar
