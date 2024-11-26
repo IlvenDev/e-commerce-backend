@@ -1,9 +1,0 @@
-name: helloWorld
-on: [push]
-jobs: 
-  Hello-world:
-    runs-on: ubuntu-latest
-    steps:
-      - name: "My first command"
-        run: echo "Hello world"
-      
