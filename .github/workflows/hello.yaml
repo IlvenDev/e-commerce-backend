@@ -6,4 +6,10 @@ jobs:
     steps:
       - name: "My first command"
         run: echo "Hello world"
+      - run: echo "The name of your branch is ${{github.ref}}"
+      - name: "Checkout repository code"
+        run: actions/checkout@v4
+      - name: "Show structure"
+        run: tree ./
+      - run: echo "it works"
       
