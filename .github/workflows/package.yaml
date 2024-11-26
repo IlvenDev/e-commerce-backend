@@ -13,3 +13,4 @@ jobs:
           distribution: 'corretto'
       - name: "Run maven test"
         run: mvn -DskipTests package
+      - run: ls -la target/
