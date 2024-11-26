@@ -8,7 +8,7 @@ jobs:
         run: echo "Hello world"
       - run: echo "The name of your branch is ${{github.ref}}"
       - name: "Checkout repository code"
-        run: actions/checkout@v4
+        run: actions/checkout@main
       - name: "Show structure"
         run: tree ./
       - run: echo "it works"
