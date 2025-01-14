@@ -1,9 +1,0 @@
-body {
-    background: yellow;
-}
-
-.productsList, #productsList {
-    display: flex;
-    justify-content: space-around;
-    list-style: none;
-}
